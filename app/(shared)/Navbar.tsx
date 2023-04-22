@@ -1,7 +1,8 @@
 "use client";
 import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure, Menu, Transition } from "@headlessui/react"; // client only
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 function classNames(...classes: (string | undefined)[]): string {
     return classes.filter(Boolean).join(" ");
@@ -16,15 +17,19 @@ export default function Navbar() {
                         <div className="flex h-16 justify-between">
                             <div className="flex">
                                 <div className="flex flex-shrink-0 items-center">
-                                    <img
+                                    <Image
                                         className="block h-8 w-auto lg:hidden"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                                        src="https://tailwindui.com/img/logos/mark.svg"
                                         alt="Your Company"
+                                        width={32}
+                                        height={32}
                                     />
-                                    <img
+                                    <Image
                                         className="hidden h-8 w-auto lg:block"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                                        src="https://tailwindui.com/img/logos/mark.svg"
                                         alt="Your Company"
+                                        width={32}
+                                        height={32}
                                     />
                                 </div>
                                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
