@@ -4,8 +4,8 @@ const featuredPost = {
     href: "#",
     description:
         "Libero neque aenean tincidunt nec consequat tempor. Viverra odio id velit adipiscing id. Nisi vestibulum orci eget bibendum dictum. Velit viverra posuere vulputate volutpat nunc. Nunc netus sit faucibus.",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
+    date: "Apr 24, 2023",
+    datetime: "2023-04-24",
     author: {
         name: "Michael Foster",
         href: "#",
@@ -16,12 +16,12 @@ const featuredPost = {
 const posts = [
     {
         id: 2,
-        title: "Boost your conversion rate",
+        title: "ChatGPT is a chatbot that uses GPT-3 to generate responses",
         href: "#",
         description:
             "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
-        date: "Mar 10, 2020",
-        datetime: "2020-03-16",
+        date: "Apr 18, 2023",
+        datetime: "2023-04-18",
         author: {
             name: "Lindsay Walton",
             href: "#",
@@ -29,7 +29,21 @@ const posts = [
                 "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
         },
     },
-    // More posts...
+    {
+        id: 3,
+        title: "How to use ai agents for customer support",
+        href: "#",
+        description:
+            "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
+        date: "Mar 16, 2023",
+        datetime: "2023-04-16",
+        author: {
+            name: "Lindsay Walton",
+            href: "#",
+            imageUrl:
+                "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        },
+    },
 ];
 
 export default function FeaturedPosts() {
