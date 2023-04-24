@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const featuredPost = {
     id: 1,
@@ -70,14 +71,14 @@ export default function FeaturedPosts() {
                     </p>
                     <div className="mt-4 flex flex-col justify-between gap-6 sm:mt-8 sm:flex-row-reverse sm:gap-8 lg:mt-4 lg:flex-col">
                         <div className="flex">
-                            <a
+                            <Link
                                 href={featuredPost.href}
                                 className="text-sm font-semibold leading-6 text-indigo-600"
                                 aria-describedby="featured-post"
                             >
                                 Continue reading{" "}
                                 <span aria-hidden="true">&rarr;</span>
-                            </a>
+                            </Link>
                         </div>
                         <div className="flex lg:border-t lg:border-gray-900/10 lg:pt-8">
                             <a
@@ -108,10 +109,10 @@ export default function FeaturedPosts() {
                                         {post.date}
                                     </time>
                                     <h2 className="mt-2 text-lg font-semibold text-gray-900 group-hover:text-gray-600">
-                                        <a href={post.href}>
+                                        <Link href={post.href}>
                                             <span className="absolute inset-0" />
                                             {post.title}
-                                        </a>
+                                        </Link>
                                     </h2>
                                     <p className="mt-4 text-sm leading-6 text-gray-600">
                                         {post.description}
