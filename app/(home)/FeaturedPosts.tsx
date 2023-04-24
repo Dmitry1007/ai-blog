@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const featuredPost = {
     id: 1,
     title: "We’re incredibly proud to announce we have secured $75m in Series B",
@@ -38,10 +40,10 @@ const posts = [
         date: "Mar 16, 2023",
         datetime: "2023-04-16",
         author: {
-            name: "Lindsay Walton",
+            name: "Tom Cook",
             href: "#",
             imageUrl:
-                "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+                "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
         },
     },
 ];
@@ -82,10 +84,12 @@ export default function FeaturedPosts() {
                                 href={featuredPost.author.href}
                                 className="flex gap-x-2.5 text-sm font-semibold leading-6 text-gray-900"
                             >
-                                <img
+                                <Image
                                     src={featuredPost.author.imageUrl}
                                     alt=""
                                     className="h-6 w-6 flex-none rounded-full bg-gray-50"
+                                    width={24}
+                                    height={24}
                                 />
                                 {featuredPost.author.name}
                             </a>
@@ -118,10 +122,12 @@ export default function FeaturedPosts() {
                                         href={post.author.href}
                                         className="relative flex gap-x-2.5 text-sm font-semibold leading-6 text-gray-900"
                                     >
-                                        <img
+                                        <Image
                                             src={post.author.imageUrl}
                                             alt=""
                                             className="h-6 w-6 flex-none rounded-full bg-gray-50"
+                                            width={24}
+                                            height={24}
                                         />
                                         {post.author.name}
                                     </a>
