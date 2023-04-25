@@ -2,39 +2,6 @@ import { Post, User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
-const posts = [
-    {
-        id: 2,
-        title: "ChatGPT is a chatbot that uses GPT-3 to generate responses",
-        href: "#",
-        description:
-            "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
-        date: "Apr 18, 2023",
-        datetime: "2023-04-18",
-        author: {
-            name: "Lindsay Walton",
-            href: "#",
-            imageUrl:
-                "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
-    },
-    {
-        id: 3,
-        title: "How to use ai agents for customer support",
-        href: "#",
-        description:
-            "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
-        date: "Mar 16, 2023",
-        datetime: "2023-04-16",
-        author: {
-            name: "Tom Cook",
-            href: "#",
-            imageUrl:
-                "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
-    },
-];
-
 type Props = {
     featuredPosts: Array<Post>;
     postAuthors: Array<User>;
@@ -82,9 +49,7 @@ export default function FeaturedPosts({ featuredPosts, postAuthors }: Props) {
                             >
                                 <Image
                                     src={
-                                        postAuthors[0].avatar
-                                            ? postAuthors[0].avatar.toString()
-                                            : ""
+                                        postAuthors[0].avatar?.toString() ?? ""
                                     }
                                     alt=""
                                     className="h-6 w-6 flex-none rounded-full bg-gray-50"
@@ -98,38 +63,44 @@ export default function FeaturedPosts({ featuredPosts, postAuthors }: Props) {
                 </article>
                 <div className="mx-auto w-full max-w-2xl border-t border-gray-900/10 pt-12 sm:pt-16 lg:mx-0 lg:max-w-none lg:border-t-0 lg:pt-0">
                     <div className="-my-12 divide-y divide-gray-900/10">
-                        {posts.map((post) => (
+                        {featuredPosts.slice(1).map((post, index) => (
                             <article key={post.id} className="py-12">
                                 <div className="group relative max-w-xl">
                                     <time
-                                        dateTime={post.datetime}
+                                        dateTime={post.createdAt.toString()}
                                         className="block text-sm leading-6 text-gray-600"
                                     >
-                                        {post.date}
+                                        {formatDate(post.createdAt.toString())}
                                     </time>
                                     <h2 className="mt-2 text-lg font-semibold text-gray-900 group-hover:text-gray-600">
-                                        <Link href={post.href}>
+                                        <Link
+                                            href={`${process.env.NEXT_PUBLIC_URL}/post/${post.id}`}
+                                        >
                                             <span className="absolute inset-0" />
                                             {post.title}
                                         </Link>
                                     </h2>
                                     <p className="mt-4 text-sm leading-6 text-gray-600">
-                                        {post.description}
+                                        {post.content}
                                     </p>
                                 </div>
                                 <div className="mt-4 flex">
                                     <a
-                                        href={post.author.href}
+                                        href={postAuthors[0].avatar?.toString()}
                                         className="relative flex gap-x-2.5 text-sm font-semibold leading-6 text-gray-900"
                                     >
                                         <Image
-                                            src={post.author.imageUrl}
+                                            src={
+                                                postAuthors[
+                                                    index + 1
+                                                ]?.avatar?.toString() ?? ""
+                                            }
                                             alt=""
                                             className="h-6 w-6 flex-none rounded-full bg-gray-50"
                                             width={24}
                                             height={24}
                                         />
-                                        {post.author.name}
+                                        {postAuthors[index + 1]?.name}
                                     </a>
                                 </div>
                             </article>
