@@ -1,3 +1,4 @@
+import { Post } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -49,30 +50,38 @@ const posts = [
     },
 ];
 
-export default function FeaturedPosts() {
+type Props = {
+    featuredPosts: Array<Post>;
+};
+
+export default function FeaturedPosts({ featuredPosts }: Props) {
+    const formatDate = (date: string) => {
+        return date.split(" ").slice(0, 3).join(" ");
+    };
+
     return (
         <div className="bg-white py-24 sm:py-32">
             <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-12 px-6 sm:gap-y-16 lg:grid-cols-2 lg:px-8">
                 <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-lg">
                     <time
-                        dateTime={featuredPost.datetime}
+                        dateTime={featuredPosts[0].createdAt.toString()}
                         className="block text-sm leading-6 text-gray-600"
                     >
-                        {featuredPost.date}
+                        {formatDate(featuredPosts[0].createdAt.toString())}
                     </time>
                     <h2
                         id="featured-post"
                         className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
                     >
-                        {featuredPost.title}
+                        {featuredPosts[0]?.title}
                     </h2>
                     <p className="mt-4 text-lg leading-8 text-gray-600">
-                        {featuredPost.description}
+                        {featuredPosts[0]?.content}
                     </p>
                     <div className="mt-4 flex flex-col justify-between gap-6 sm:mt-8 sm:flex-row-reverse sm:gap-8 lg:mt-4 lg:flex-col">
                         <div className="flex">
                             <Link
-                                href={featuredPost.href}
+                                href={`${process.env.NEXT_PUBLIC_URL}/post/${featuredPosts[0]?.id}`}
                                 className="text-sm font-semibold leading-6 text-indigo-600"
                                 aria-describedby="featured-post"
                             >

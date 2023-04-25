@@ -1,9 +1,18 @@
 import FeaturedPosts from "app/(home)/FeaturedPosts";
+import { prisma } from "app/api/client";
 
-export default function Home() {
+const getPosts = async () => {
+    const posts = await prisma.post.findMany();
+    return posts;
+};
+
+export default async function Home() {
+    const posts = await getPosts();
+    const featuredPosts = [posts[0], posts[3], posts[6]];
+
     return (
         <main className="">
-            <FeaturedPosts />
+            <FeaturedPosts featuredPosts={featuredPosts} />
         </main>
     );
 }
