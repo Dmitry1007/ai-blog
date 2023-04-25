@@ -1,22 +1,7 @@
-import { Post } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
-const featuredPost = {
-    id: 1,
-    title: "We’re incredibly proud to announce we have secured $75m in Series B",
-    href: "#",
-    description:
-        "Libero neque aenean tincidunt nec consequat tempor. Viverra odio id velit adipiscing id. Nisi vestibulum orci eget bibendum dictum. Velit viverra posuere vulputate volutpat nunc. Nunc netus sit faucibus.",
-    date: "Apr 24, 2023",
-    datetime: "2023-04-24",
-    author: {
-        name: "Michael Foster",
-        href: "#",
-        imageUrl:
-            "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-};
 const posts = [
     {
         id: 2,
@@ -52,9 +37,10 @@ const posts = [
 
 type Props = {
     featuredPosts: Array<Post>;
+    postAuthors: Array<User>;
 };
 
-export default function FeaturedPosts({ featuredPosts }: Props) {
+export default function FeaturedPosts({ featuredPosts, postAuthors }: Props) {
     const formatDate = (date: string) => {
         return date.split(" ").slice(0, 3).join(" ");
     };
@@ -91,17 +77,21 @@ export default function FeaturedPosts({ featuredPosts }: Props) {
                         </div>
                         <div className="flex lg:border-t lg:border-gray-900/10 lg:pt-8">
                             <a
-                                href={featuredPost.author.href}
+                                href={postAuthors[0].avatar?.toString()}
                                 className="flex gap-x-2.5 text-sm font-semibold leading-6 text-gray-900"
                             >
                                 <Image
-                                    src={featuredPost.author.imageUrl}
+                                    src={
+                                        postAuthors[0].avatar
+                                            ? postAuthors[0].avatar.toString()
+                                            : ""
+                                    }
                                     alt=""
                                     className="h-6 w-6 flex-none rounded-full bg-gray-50"
                                     width={24}
                                     height={24}
                                 />
-                                {featuredPost.author.name}
+                                {postAuthors[0]?.name}
                             </a>
                         </div>
                     </div>
