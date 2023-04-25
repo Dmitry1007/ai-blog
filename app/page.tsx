@@ -2,6 +2,9 @@ import FeaturedPosts from "app/(home)/FeaturedPosts";
 import { prisma } from "app/api/client";
 import { Post } from "@prisma/client";
 
+// revalidate every 300 seconds (5 minutes)
+export const revalidate = 300;
+
 const getPosts = async () => {
     const posts = await prisma.post.findMany();
     return posts;

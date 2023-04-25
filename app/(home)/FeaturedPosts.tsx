@@ -77,11 +77,11 @@ export default function FeaturedPosts({ featuredPosts, postAuthors }: Props) {
                                             href={`${process.env.NEXT_PUBLIC_URL}/post/${post.id}`}
                                         >
                                             <span className="absolute inset-0" />
-                                            {post.title}
+                                            {post?.title}
                                         </Link>
                                     </h2>
                                     <p className="mt-4 text-sm leading-6 text-gray-600">
-                                        {post.content}
+                                        {post?.content}
                                     </p>
                                 </div>
                                 <div className="mt-4 flex">
