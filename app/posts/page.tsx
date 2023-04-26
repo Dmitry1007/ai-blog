@@ -23,13 +23,17 @@ import Image from "next/image";
 //     },
 // ];
 
-const getPosts = async () => {
-    const posts = await prisma.post.findMany();
-    return posts;
-};
+// const getPosts = async () => {
+//     const posts = await prisma.post.findMany();
+//     return posts;
+// };
 
 export default async function Posts() {
-    const posts = await getPosts();
+    const posts = await prisma.post.findMany({
+        include: {
+            author: true,
+        },
+    });
 
     return (
         <div className="bg-white py-24 sm:py-32">
@@ -85,16 +89,18 @@ export default async function Posts() {
                                     </div>
                                     <div className="mt-6 flex border-t border-gray-900/5 pt-6">
                                         <div className="relative flex items-center gap-x-4">
-                                            <img
-                                                src=""
+                                            <Image
+                                                src={post.author.avatar || ""}
                                                 alt=""
                                                 className="h-10 w-10 rounded-full bg-gray-50"
+                                                width={32}
+                                                height={32}
                                             />
                                             <div className="text-sm leading-6">
                                                 <p className="font-semibold text-gray-900">
                                                     <a href="">
                                                         <span className="absolute inset-0" />
-                                                        Authors Name
+                                                        {post.author.name}
                                                     </a>
                                                 </p>
                                                 <p className="text-gray-600">
