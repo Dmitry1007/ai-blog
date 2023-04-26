@@ -1,6 +1,7 @@
 import FeaturedPosts from "app/(home)/FeaturedPosts";
 import { prisma } from "app/api/client";
 import { Post } from "@prisma/client";
+import Header from "app/(shared)/Header";
 
 // revalidate every 300 seconds (5 minutes)
 export const revalidate = 300;
@@ -25,6 +26,7 @@ export default async function Home() {
 
     return (
         <main className="">
+            <Header />
             <FeaturedPosts
                 featuredPosts={featuredPosts}
                 postAuthors={authors}
