@@ -2,12 +2,15 @@ import { Post, User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
+interface PostWithAuthor extends Post {
+    author: User;
+}
+
 type Props = {
-    featuredPosts: Array<Post>;
-    postAuthors: Array<User>;
+    featuredPosts: PostWithAuthor[];
 };
 
-export default function FeaturedPosts({ featuredPosts, postAuthors }: Props) {
+export default function FeaturedPosts({ featuredPosts }: Props) {
     const formatDate = (date: string) => {
         return date.split(" ").slice(0, 3).join(" ");
     };
@@ -17,10 +20,10 @@ export default function FeaturedPosts({ featuredPosts, postAuthors }: Props) {
             <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-12 px-6 sm:gap-y-16 lg:grid-cols-2 lg:px-8">
                 <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-lg">
                     <time
-                        dateTime={featuredPosts[0].createdAt.toString()}
+                        dateTime={featuredPosts[0]?.createdAt.toString()}
                         className="block text-sm leading-6 text-gray-600"
                     >
-                        {formatDate(featuredPosts[0].createdAt.toString())}
+                        {formatDate(featuredPosts[0]?.createdAt.toString())}
                     </time>
                     <h2
                         id="featured-post"
@@ -44,26 +47,24 @@ export default function FeaturedPosts({ featuredPosts, postAuthors }: Props) {
                         </div>
                         <div className="flex lg:border-t lg:border-gray-900/10 lg:pt-8">
                             <a
-                                href={postAuthors[0].avatar?.toString()}
+                                href="#"
                                 className="flex gap-x-2.5 text-sm font-semibold leading-6 text-gray-900"
                             >
                                 <Image
-                                    src={
-                                        postAuthors[0].avatar?.toString() ?? ""
-                                    }
+                                    src={featuredPosts[0]?.author.avatar ?? ""}
                                     alt=""
                                     className="h-6 w-6 flex-none rounded-full bg-gray-50"
                                     width={24}
                                     height={24}
                                 />
-                                {postAuthors[0]?.name}
+                                {featuredPosts[0]?.author.name}
                             </a>
                         </div>
                     </div>
                 </article>
                 <div className="mx-auto w-full max-w-2xl border-t border-gray-900/10 pt-12 sm:pt-16 lg:mx-0 lg:max-w-none lg:border-t-0 lg:pt-0">
                     <div className="-my-12 divide-y divide-gray-900/10">
-                        {featuredPosts.slice(1).map((post, index) => (
+                        {featuredPosts?.slice(1).map((post, index) => (
                             <article key={post.id} className="py-12">
                                 <div className="group relative max-w-xl">
                                     <time
@@ -77,30 +78,26 @@ export default function FeaturedPosts({ featuredPosts, postAuthors }: Props) {
                                             href={`${process.env.NEXT_PUBLIC_URL}/post/${post.id}`}
                                         >
                                             <span className="absolute inset-0" />
-                                            {post?.title}
+                                            {post.title}
                                         </Link>
                                     </h2>
                                     <p className="mt-4 text-sm leading-6 text-gray-600">
-                                        {post?.content}
+                                        {post.content}
                                     </p>
                                 </div>
                                 <div className="mt-4 flex">
                                     <a
-                                        href={postAuthors[0].avatar?.toString()}
+                                        href="#"
                                         className="relative flex gap-x-2.5 text-sm font-semibold leading-6 text-gray-900"
                                     >
                                         <Image
-                                            src={
-                                                postAuthors[
-                                                    index + 1
-                                                ]?.avatar?.toString() ?? ""
-                                            }
+                                            src={post.author.avatar ?? ""}
                                             alt=""
                                             className="h-6 w-6 flex-none rounded-full bg-gray-50"
                                             width={24}
                                             height={24}
                                         />
-                                        {postAuthors[index + 1]?.name}
+                                        {post.author.name}
                                     </a>
                                 </div>
                             </article>
