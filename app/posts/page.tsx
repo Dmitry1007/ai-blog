@@ -1,12 +1,34 @@
+import { Post, User } from "@prisma/client";
 import { prisma } from "app/api/client";
 import Image from "next/image";
 
-export default async function Posts() {
-    const posts = await prisma.post.findMany({
+interface PostWithAuthor extends Post {
+    author: User;
+}
+
+const getPosts = async () => {
+    const posts: PostWithAuthor[] = await prisma.post.findMany({
         include: {
             author: true,
         },
     });
+
+    const formattedPosts = await Promise.all(
+        posts.map(async (post: PostWithAuthor) => {
+            // const imageModule = require(`../../public${post.image}`);
+            const imageModule = await import(`../../public${post.image}`);
+            return {
+                ...post,
+                image: imageModule.default,
+                author: post.author as User,
+            };
+        })
+    );
+    return formattedPosts;
+};
+
+export default async function Posts() {
+    const posts = await getPosts();
 
     return (
         <div className="bg-white py-24 sm:py-32">
@@ -19,7 +41,7 @@ export default async function Posts() {
                         Learn how to grow your business using ai.
                     </p>
                     <div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
-                        {posts.map((post) => (
+                        {posts?.map((post) => (
                             <article
                                 key={post.id}
                                 className="relative isolate flex flex-col gap-8 lg:flex-row"
@@ -27,10 +49,10 @@ export default async function Posts() {
                                 <div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
                                     <Image
                                         src={post.image}
-                                        alt=""
+                                        alt="blog post cover image"
                                         className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
-                                        width={300}
-                                        height={300}
+                                        fill
+                                        // placeholder="blur"
                                     />
                                     <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
                                 </div>
@@ -64,10 +86,10 @@ export default async function Posts() {
                                         <div className="relative flex items-center gap-x-4">
                                             <Image
                                                 src={post.author.avatar || ""}
-                                                alt=""
+                                                alt="author avatar"
                                                 className="h-10 w-10 rounded-full bg-gray-50"
-                                                width={32}
-                                                height={32}
+                                                width={40}
+                                                height={40}
                                             />
                                             <div className="text-sm leading-6">
                                                 <p className="font-semibold text-gray-900">
