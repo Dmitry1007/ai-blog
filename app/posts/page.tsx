@@ -51,8 +51,8 @@ export default async function Posts() {
                                         src={post.image}
                                         alt="blog post cover image"
                                         className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
+                                        placeholder="blur"
                                         fill
-                                        // placeholder="blur"
                                     />
                                     <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
                                 </div>
