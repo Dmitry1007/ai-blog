@@ -3,6 +3,9 @@ import { useState } from "react";
 import { PostWithAuthor } from "@/app/types";
 import { XMarkIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import EditorMenuBar from "./EditorMenuBar";
 
 type Props = {
     post: PostWithAuthor;
@@ -19,6 +22,11 @@ const Content = ({ post }: Props) => {
         e.preventDefault();
         console.log("submit");
     };
+
+    const editor = useEditor({
+        extensions: [StarterKit],
+        content: "<p>Hello World! 🌎️</p>",
+    });
 
     return (
         <div className="prose w-full max-w-full mb-10">
@@ -72,6 +80,17 @@ const Content = ({ post }: Props) => {
                         sizes=""
                         style={{ objectFit: "cover" }}
                     />
+                </div>
+
+                <div
+                    className={
+                        isEditable
+                            ? "border-2 rounded-md bg-wh-50 p-3"
+                            : "w-full max-w-full"
+                    }
+                >
+                    {isEditable && <EditorMenuBar editor={editor} />}
+                    <EditorContent editor={editor} />
                 </div>
 
                 {isEditable && (
