@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import EditorMenuBar from "./EditorMenuBar";
+import { Editor } from "@tiptap/react";
 
 type Props = {
     post: PostWithAuthor;
@@ -18,15 +19,27 @@ const Content = ({ post }: Props) => {
     const [content, setContent] = useState<string>(post.content);
     const [contentError, setContentError] = useState<string>("");
 
+    const handleOnUpdateContent = ({ editor }: any) => {
+        if (!(editor as Editor).isEmpty) setContentError("");
+        setContent((editor as Editor).getHTML());
+    };
+
+    const editor = useEditor({
+        extensions: [StarterKit],
+        content: content,
+        editable: isEditable,
+        onUpdate: handleOnUpdateContent,
+    });
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("submit");
     };
 
-    const editor = useEditor({
-        extensions: [StarterKit],
-        content: "<p>Hello World! 🌎️</p>",
-    });
+    const handleIsEditable = (bool: boolean) => {
+        setIsEditable(bool);
+        editor?.setEditable(bool);
+    };
 
     return (
         <div className="prose w-full max-w-full mb-10">
@@ -39,11 +52,11 @@ const Content = ({ post }: Props) => {
                 </h4>
                 <div className="mt-4">
                     {isEditable ? (
-                        <button onClick={() => setIsEditable(false)}>
+                        <button onClick={() => handleIsEditable(false)}>
                             <XMarkIcon className="h-6 w-6 text-accent-red" />
                         </button>
                     ) : (
-                        <button onClick={() => setIsEditable(true)}>
+                        <button onClick={() => handleIsEditable(true)}>
                             <PencilSquareIcon className="h-6 w-6 text-accent-red" />
                         </button>
                     )}
@@ -81,7 +94,7 @@ const Content = ({ post }: Props) => {
                         style={{ objectFit: "cover" }}
                     />
                 </div>
-
+                {/* Content */}
                 <div
                     className={
                         isEditable
