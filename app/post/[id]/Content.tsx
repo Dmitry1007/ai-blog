@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { PostWithAuthor } from "@/app/types";
 import { XMarkIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 
 type Props = {
     post: PostWithAuthor;
@@ -61,6 +62,16 @@ const Content = ({ post }: Props) => {
                     <h6 className="text-wh-300 text-xs">
                         {post.createdAt.toDateString()}
                     </h6>
+                </div>
+                {/* Image */}
+                <div className="relative w-auto mt-2 mb-16 h-96">
+                    <Image
+                        fill
+                        alt={post.title}
+                        src={post.image}
+                        sizes=""
+                        style={{ objectFit: "cover" }}
+                    />
                 </div>
             </form>
         </div>
