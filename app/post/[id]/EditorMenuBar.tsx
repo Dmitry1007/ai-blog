@@ -10,12 +10,16 @@ const EditorMenuBar = ({ editor }: Props) => {
     }
 
     return (
-        <>
+        <div className="flex flex-wrap justify-start">
             <button
                 type="button"
                 onClick={() => editor.chain().focus().toggleBold().run()}
                 disabled={!editor.can().chain().focus().toggleBold().run()}
-                className={editor.isActive("bold") ? "is-active" : ""}
+                className={
+                    editor.isActive("bold")
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                }
             >
                 bold
             </button>
@@ -23,7 +27,11 @@ const EditorMenuBar = ({ editor }: Props) => {
                 type="button"
                 onClick={() => editor.chain().focus().toggleItalic().run()}
                 disabled={!editor.can().chain().focus().toggleItalic().run()}
-                className={editor.isActive("italic") ? "is-active" : ""}
+                className={
+                    editor.isActive("italic")
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                }
             >
                 italic
             </button>
@@ -31,7 +39,11 @@ const EditorMenuBar = ({ editor }: Props) => {
                 type="button"
                 onClick={() => editor.chain().focus().toggleStrike().run()}
                 disabled={!editor.can().chain().focus().toggleStrike().run()}
-                className={editor.isActive("strike") ? "is-active" : ""}
+                className={
+                    editor.isActive("strike")
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                }
             >
                 strike
             </button>
@@ -39,26 +51,22 @@ const EditorMenuBar = ({ editor }: Props) => {
                 type="button"
                 onClick={() => editor.chain().focus().toggleCode().run()}
                 disabled={!editor.can().chain().focus().toggleCode().run()}
-                className={editor.isActive("code") ? "is-active" : ""}
+                className={
+                    editor.isActive("code")
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                }
             >
                 code
             </button>
             <button
                 type="button"
-                onClick={() => editor.chain().focus().unsetAllMarks().run()}
-            >
-                clear marks
-            </button>
-            <button
-                type="button"
-                onClick={() => editor.chain().focus().clearNodes().run()}
-            >
-                clear nodes
-            </button>
-            <button
-                type="button"
                 onClick={() => editor.chain().focus().setParagraph().run()}
-                className={editor.isActive("paragraph") ? "is-active" : ""}
+                className={
+                    editor.isActive("paragraph")
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                }
             >
                 paragraph
             </button>
@@ -68,7 +76,9 @@ const EditorMenuBar = ({ editor }: Props) => {
                     editor.chain().focus().toggleHeading({ level: 1 }).run()
                 }
                 className={
-                    editor.isActive("heading", { level: 1 }) ? "is-active" : ""
+                    editor.isActive("heading", { level: 1 })
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
                 }
             >
                 h1
@@ -79,7 +89,9 @@ const EditorMenuBar = ({ editor }: Props) => {
                     editor.chain().focus().toggleHeading({ level: 2 }).run()
                 }
                 className={
-                    editor.isActive("heading", { level: 2 }) ? "is-active" : ""
+                    editor.isActive("heading", { level: 2 })
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
                 }
             >
                 h2
@@ -90,7 +102,9 @@ const EditorMenuBar = ({ editor }: Props) => {
                     editor.chain().focus().toggleHeading({ level: 3 }).run()
                 }
                 className={
-                    editor.isActive("heading", { level: 3 }) ? "is-active" : ""
+                    editor.isActive("heading", { level: 3 })
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
                 }
             >
                 h3
@@ -101,7 +115,9 @@ const EditorMenuBar = ({ editor }: Props) => {
                     editor.chain().focus().toggleHeading({ level: 4 }).run()
                 }
                 className={
-                    editor.isActive("heading", { level: 4 }) ? "is-active" : ""
+                    editor.isActive("heading", { level: 4 })
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
                 }
             >
                 h4
@@ -112,7 +128,9 @@ const EditorMenuBar = ({ editor }: Props) => {
                     editor.chain().focus().toggleHeading({ level: 5 }).run()
                 }
                 className={
-                    editor.isActive("heading", { level: 5 }) ? "is-active" : ""
+                    editor.isActive("heading", { level: 5 })
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
                 }
             >
                 h5
@@ -123,7 +141,9 @@ const EditorMenuBar = ({ editor }: Props) => {
                     editor.chain().focus().toggleHeading({ level: 6 }).run()
                 }
                 className={
-                    editor.isActive("heading", { level: 6 }) ? "is-active" : ""
+                    editor.isActive("heading", { level: 6 })
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
                 }
             >
                 h6
@@ -131,58 +151,48 @@ const EditorMenuBar = ({ editor }: Props) => {
             <button
                 type="button"
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
-                className={editor.isActive("bulletList") ? "is-active" : ""}
+                className={
+                    editor.isActive("bulletList")
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                }
             >
                 bullet list
             </button>
             <button
                 type="button"
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
-                className={editor.isActive("orderedList") ? "is-active" : ""}
+                className={
+                    editor.isActive("orderedList")
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                }
             >
                 ordered list
             </button>
             <button
                 type="button"
                 onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-                className={editor.isActive("codeBlock") ? "is-active" : ""}
+                className={
+                    editor.isActive("codeBlock")
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                }
             >
                 code block
             </button>
             <button
                 type="button"
                 onClick={() => editor.chain().focus().toggleBlockquote().run()}
-                className={editor.isActive("blockquote") ? "is-active" : ""}
+                className={
+                    editor.isActive("blockquote")
+                        ? "rounded bg-white px-2 py-1 text-xs font-semibold text-orange-200 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                        : "rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 m-1"
+                }
             >
                 blockquote
             </button>
-            <button
-                type="button"
-                onClick={() => editor.chain().focus().setHorizontalRule().run()}
-            >
-                horizontal rule
-            </button>
-            <button
-                type="button"
-                onClick={() => editor.chain().focus().setHardBreak().run()}
-            >
-                hard break
-            </button>
-            <button
-                type="button"
-                onClick={() => editor.chain().focus().undo().run()}
-                disabled={!editor.can().chain().focus().undo().run()}
-            >
-                undo
-            </button>
-            <button
-                type="button"
-                onClick={() => editor.chain().focus().redo().run()}
-                disabled={!editor.can().chain().focus().redo().run()}
-            >
-                redo
-            </button>
-        </>
+        </div>
     );
 };
 
