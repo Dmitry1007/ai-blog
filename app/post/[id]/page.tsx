@@ -1,6 +1,5 @@
 import { prisma } from "@/app/api/client";
-import { Post as PostType } from "@prisma/client";
-import { FormattedPost } from "@/app/types";
+import { PostWithAuthor } from "@/app/types";
 import Content from "./Content";
 
 // revalidate every 300 seconds (5 minutes)
@@ -11,23 +10,26 @@ type Props = {
 };
 
 const getPost = async (id: number) => {
-    const post: PostType | null = await prisma.post.findUnique({
+    const post = await prisma.post.findUnique({
         where: { id },
+        include: {
+            author: true,
+        },
     });
     if (!post) throw new Error("Post not found");
 
-    const formattedPost = {
-        ...post,
-        createdAt: post.createdAt.toISOString(),
-        updatedAt: post.updatedAt.toISOString(),
-    };
+    // const formattedPost: PostWithAuthor = {
+    //     ...post,
+    //     author: post.author,
+    // };
 
-    return formattedPost;
+    return post;
 };
 
 export default async function ({ params }: Props) {
     const { id } = params;
-    const post: FormattedPost | null = await getPost(Number(id));
+    const post = await getPost(Number(id));
+
     return (
         <main className="px-10 leading-7">
             <div className="md:flex gap-10 mb-5">

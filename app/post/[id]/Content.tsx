@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import { FormattedPost } from "@/app/types";
+import { PostWithAuthor } from "@/app/types";
 import { XMarkIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
 
 type Props = {
-    post: FormattedPost;
+    post: PostWithAuthor;
 };
 
 const Content = ({ post }: Props) => {
@@ -52,6 +52,16 @@ const Content = ({ post }: Props) => {
                 ) : (
                     <h3 className="font-bold text-3xl mt-3">{title}</h3>
                 )}
+                <div className="flex gap-3">
+                    {/* Author */}
+                    <h5 className="font-semibold text-xs">
+                        By {post.author.name}
+                    </h5>
+                    {/* Date */}
+                    <h6 className="text-wh-300 text-xs">
+                        {post.createdAt.toDateString()}
+                    </h6>
+                </div>
             </form>
         </div>
     );

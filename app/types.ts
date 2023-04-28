@@ -1,12 +1,5 @@
-export type FormattedPost = {
-    id: number;
-    createdAt: string;
-    updatedAt: string;
-    published: boolean;
-    category: string;
-    title: string;
-    content: string;
-    image: string;
-    snippet: string;
-    authorId: number;
-};
+import { Post, User } from "@prisma/client";
+
+export interface PostWithAuthor extends Post {
+    author: User;
+}
