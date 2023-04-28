@@ -14,6 +14,11 @@ const Content = ({ post }: Props) => {
     const [content, setContent] = useState<string>(post.content);
     const [contentError, setContentError] = useState<string>("");
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log("submit");
+    };
+
     return (
         <div className="prose w-full max-w-full mb-10">
             {/* Breadcrumbs */}
@@ -35,6 +40,19 @@ const Content = ({ post }: Props) => {
                     )}
                 </div>
             </div>
+            <form onSubmit={handleSubmit}>
+                {/* Header */}
+                {isEditable ? (
+                    <textarea
+                        className="border-2 rounded-md bg-wh-50 p-3 w-full"
+                        placeholder="Title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                ) : (
+                    <h3 className="font-bold text-3xl mt-3">{title}</h3>
+                )}
+            </form>
         </div>
     );
 };
