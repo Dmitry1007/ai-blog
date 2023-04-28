@@ -33,10 +33,7 @@ export default async function ({ params }: Props) {
     return (
         <main className="px-10 leading-7">
             <div className="md:flex gap-10 mb-5">
-                <div className="basis-3/4">
-                    <Content post={post} />
-                </div>
-                <div className="basis-1/4">SideBar</div>
+                <Content post={post} />
             </div>
         </main>
     );

@@ -73,6 +73,17 @@ const Content = ({ post }: Props) => {
                         style={{ objectFit: "cover" }}
                     />
                 </div>
+
+                {isEditable && (
+                    <div className="flex justify-end">
+                        <button
+                            type="submit"
+                            className="bg-accent-red hover:bg-wh-500 text-wh-10 font-semibold py-2 px-5 mt-5"
+                        >
+                            Submit
+                        </button>
+                    </div>
+                )}
             </form>
         </div>
     );
