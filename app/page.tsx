@@ -1,6 +1,6 @@
-import FeaturedPosts from "app/(home)/FeaturedPosts";
-import { prisma } from "app/api/client";
-import Header from "app/(shared)/Header";
+import FeaturedPosts from "@/app/(home)/FeaturedPosts";
+import { prisma } from "@/app/api/client";
+import Header from "@/app/(shared)/Header";
 import { Post, User } from "@prisma/client";
 
 // revalidate every 300 seconds (5 minutes)

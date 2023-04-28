@@ -1,6 +1,9 @@
 import { Post, User } from "@prisma/client";
-import { prisma } from "app/api/client";
+import { prisma } from "@/app/api/client";
 import Image from "next/image";
+
+// revalidate every 300 seconds (5 minutes)
+export const revalidate = 300;
 
 interface PostWithAuthor extends Post {
     author: User;
