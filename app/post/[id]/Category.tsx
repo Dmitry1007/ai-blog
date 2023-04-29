@@ -29,6 +29,18 @@ const Category = ({
     setTempContent,
     editor,
 }: Props) => {
+    const handleEnableEditing = () => {
+        handleIsEditable(true);
+        setTempTitle(title);
+        setTempContent(editor?.getHTML() || "");
+    };
+
+    const handleCancelEditing = () => {
+        handleIsEditable(false);
+        setTitle(tempTitle);
+        editor?.commands.setContent(tempContent);
+    };
+
     return (
         <div className="flex justify-between items-center">
             <h4 className="bg-accent-orange py-2 px-5 text-wh-900 text-sm font-bold">
@@ -36,11 +48,11 @@ const Category = ({
             </h4>
             <div className="mt-4">
                 {isEditable ? (
-                    <button onClick={() => handleIsEditable(false)}>
+                    <button onClick={handleCancelEditing}>
                         <XMarkIcon className="h-6 w-6 text-accent-red" />
                     </button>
                 ) : (
-                    <button onClick={() => handleIsEditable(true)}>
+                    <button onClick={handleEnableEditing}>
                         <PencilSquareIcon className="h-6 w-6 text-accent-red" />
                     </button>
                 )}
