@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
 import { PostWithAuthor } from "@/app/types";
-import { XMarkIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import EditorMenuBar from "./EditorMenuBar";
 import { Editor } from "@tiptap/react";
+import Category from "./Category";
 
 type Props = {
     post: PostWithAuthor;
@@ -14,12 +14,26 @@ type Props = {
 
 const Content = ({ post }: Props) => {
     const [isEditable, setIsEditable] = useState<boolean>(false);
+
     const [title, setTitle] = useState<string>(post.title);
     const [titleError, setTitleError] = useState<string>("");
+    const [tempTitle, setTempTitle] = useState<string>(post.title);
+
     const [content, setContent] = useState<string>(post.content);
     const [contentError, setContentError] = useState<string>("");
+    const [tempContent, setTempContent] = useState<string>(post.content);
 
-    const handleOnUpdateContent = ({ editor }: any) => {
+    const handleIsEditable = (bool: boolean) => {
+        setIsEditable(bool);
+        editor?.setEditable(bool);
+    };
+
+    const handleOnChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (title) setTitleError("");
+        setTitle(e.target.value);
+    };
+
+    const handleOnChangeContent = ({ editor }: any) => {
         if (!(editor as Editor).isEmpty) setContentError("");
         setContent((editor as Editor).getHTML());
     };
@@ -28,7 +42,7 @@ const Content = ({ post }: Props) => {
         extensions: [StarterKit],
         content: content,
         editable: isEditable,
-        onUpdate: handleOnUpdateContent,
+        onUpdate: handleOnChangeContent,
     });
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,32 +50,23 @@ const Content = ({ post }: Props) => {
         console.log("submit");
     };
 
-    const handleIsEditable = (bool: boolean) => {
-        setIsEditable(bool);
-        editor?.setEditable(bool);
-    };
-
     return (
         <div className="prose w-full max-w-full mb-10">
             {/* Breadcrumbs */}
             <h5 className="text-wh-300">{`Home > ${post.category} > ${post.title}`}</h5>
             {/* Category and edit icon */}
-            <div className="flex justify-between items-center">
-                <h4 className="bg-accent-orange py-2 px-5 text-wh-900 text-sm font-bold">
-                    {post.category}
-                </h4>
-                <div className="mt-4">
-                    {isEditable ? (
-                        <button onClick={() => handleIsEditable(false)}>
-                            <XMarkIcon className="h-6 w-6 text-accent-red" />
-                        </button>
-                    ) : (
-                        <button onClick={() => handleIsEditable(true)}>
-                            <PencilSquareIcon className="h-6 w-6 text-accent-red" />
-                        </button>
-                    )}
-                </div>
-            </div>
+            <Category
+                isEditable={isEditable}
+                handleIsEditable={handleIsEditable}
+                title={title}
+                setTitle={setTitle}
+                tempTitle={tempTitle}
+                setTempTitle={setTempTitle}
+                tempContent={tempContent}
+                setTempContent={setTempContent}
+                editor={editor}
+                post={post}
+            />
             <form onSubmit={handleSubmit}>
                 {/* Header */}
                 {isEditable ? (
@@ -69,7 +74,7 @@ const Content = ({ post }: Props) => {
                         className="border-2 rounded-md bg-wh-50 p-3 w-full"
                         placeholder="Title"
                         value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={handleOnChangeTitle}
                     />
                 ) : (
                     <h3 className="font-bold text-3xl mt-3">{title}</h3>
