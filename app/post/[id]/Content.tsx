@@ -102,12 +102,19 @@ const Content = ({ post }: Props) => {
             <form onSubmit={handleSubmit}>
                 {/* Header */}
                 {isEditable ? (
-                    <textarea
-                        className="border-2 rounded-md bg-wh-50 p-3 w-full"
-                        placeholder="Title"
-                        value={title}
-                        onChange={handleOnChangeTitle}
-                    />
+                    <div>
+                        <textarea
+                            className="border-2 rounded-md bg-wh-50 p-3 w-full"
+                            placeholder="Title"
+                            value={title}
+                            onChange={handleOnChangeTitle}
+                        />
+                        {titleError && (
+                            <p className="mt-1 text-primary-500 text-red-400">
+                                {titleError}
+                            </p>
+                        )}
+                    </div>
                 ) : (
                     <h3 className="font-bold text-3xl mt-3">{title}</h3>
                 )}
