@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { PostWithAuthor } from "@/app/types";
 import Image from "next/image";
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import EditorMenuBar from "./EditorMenuBar";
 import { Editor } from "@tiptap/react";
 import Category from "./Category";
+import Article from "./Article";
 
 type Props = {
     post: PostWithAuthor;
@@ -100,16 +100,13 @@ const Content = ({ post }: Props) => {
                     />
                 </div>
                 {/* Content */}
-                <div
-                    className={
-                        isEditable
-                            ? "border-2 rounded-md bg-wh-50 p-3"
-                            : "w-full max-w-full"
-                    }
-                >
-                    {isEditable && <EditorMenuBar editor={editor} />}
-                    <EditorContent editor={editor} />
-                </div>
+                <Article
+                    setContent={setContent}
+                    contentError={contentError}
+                    editor={editor}
+                    isEditable={isEditable}
+                    title={title}
+                />
 
                 {isEditable && (
                     <div className="flex justify-end">
