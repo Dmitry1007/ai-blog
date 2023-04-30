@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../client";
 
-type Params = { params: { id: number } };
+type Params = { params: { id: string } };
 
 export async function PATCH(request: Request, { params }: Params) {
     try {
         const { id } = params;
         const { title, content } = await request.json();
         const post = await prisma.post.update({
-            where: { id: id },
+            where: { id: parseInt(id) }, // convert id from string to integer
             data: { title, content },
         });
         return NextResponse.json(post, { status: 200 });

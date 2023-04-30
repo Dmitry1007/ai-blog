@@ -50,9 +50,36 @@ const Content = ({ post }: Props) => {
         },
     });
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("submit");
+
+        // validation checks
+        if (title === "") setTitleError("This field is required.");
+        if (editor?.isEmpty) setContentError("This field is required.");
+        if (title === "" || editor?.isEmpty) return;
+
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_URL}/api/post/${post?.id}`,
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    title: title,
+                    content: content,
+                }),
+            }
+        );
+        const data = await response.json();
+
+        handleIsEditable(false);
+        setTempTitle("");
+        setTempContent("");
+
+        setTitle(data.title);
+        setContent(data.content);
+        editor?.commands.setContent(data.content);
     };
 
     return (
