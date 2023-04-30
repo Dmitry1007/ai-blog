@@ -43,6 +43,11 @@ const Content = ({ post }: Props) => {
         content: content,
         editable: isEditable,
         onUpdate: handleOnChangeContent,
+        editorProps: {
+            attributes: {
+                class: "prose prose-sm xl:prose-2xl leading-8 focus:outline-none w-full max-w-full",
+            },
+        },
     });
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
