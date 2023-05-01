@@ -7,9 +7,10 @@ export async function PATCH(request: Request, { params }: Params) {
     try {
         const { id } = params;
         const { title, content } = await request.json();
+        const snippet = content.split(" ").slice(0, 60).join(" ");
         const post = await prisma.post.update({
             where: { id: parseInt(id) }, // convert id from string to integer
-            data: { title, content },
+            data: { title, content, snippet },
         });
         return NextResponse.json(post, { status: 200 });
     } catch (error) {
