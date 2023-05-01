@@ -26,7 +26,7 @@ const getPost = async (id: number) => {
     return post;
 };
 
-export default async function ({ params }: Props) {
+export default async function Post({ params }: Props) {
     const { id } = params;
     const post = await getPost(Number(id));
 
