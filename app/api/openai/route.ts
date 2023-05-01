@@ -29,6 +29,8 @@ export async function POST(request: Request, response: any) {
                 ],
             });
 
+        // On demand revalidation, won't work on Vercel
+        // Vercel has a 5 second timeout for api calls?
         // response.revalidate("/api/posts")
         return NextResponse.json(
             {
