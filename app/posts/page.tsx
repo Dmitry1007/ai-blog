@@ -1,6 +1,7 @@
 import { PostWithAuthor } from "@/app/types";
 import { prisma } from "@/app/api/client";
 import Image from "next/image";
+import Link from "next/link";
 
 // revalidate every 300 seconds (5 minutes)
 export const revalidate = 300;
@@ -72,10 +73,12 @@ export default async function Posts() {
                                     </div>
                                     <div className="group relative max-w-xl">
                                         <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                                            <a href="">
+                                            <Link
+                                                href={`${process.env.NEXT_PUBLIC_URL}/post/${post.id}`}
+                                            >
                                                 <span className="absolute inset-0" />
                                                 {post.title}
-                                            </a>
+                                            </Link>
                                         </h3>
                                         <p className="mt-5 text-sm leading-6 text-gray-600">
                                             {post.snippet}
