@@ -7,6 +7,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { Editor } from "@tiptap/react";
 import Category from "./Category";
 import Article from "./Article";
+import BreadCrumbs from "@/app/(shared)/BreadCrumbs";
 
 type Props = {
     post: PostWithAuthor;
@@ -86,6 +87,7 @@ const Content = ({ post }: Props) => {
         <div className="prose w-full max-w-full mb-10">
             {/* Breadcrumbs */}
             <h5 className="text-wh-300">{`Home > ${post.category} > ${post.title}`}</h5>
+            <BreadCrumbs />
             {/* Category and edit icon */}
             <Category
                 isEditable={isEditable}
