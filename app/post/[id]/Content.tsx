@@ -86,8 +86,7 @@ const Content = ({ post }: Props) => {
     return (
         <div className="prose w-full max-w-full mb-10">
             {/* Breadcrumbs */}
-            <h5 className="text-wh-300">{`Home > ${post.category} > ${post.title}`}</h5>
-            <BreadCrumbs />
+            <BreadCrumbs post={post} />
             {/* Category and edit icon */}
             <Category
                 isEditable={isEditable}
