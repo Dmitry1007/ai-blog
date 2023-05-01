@@ -8,8 +8,8 @@ export default function Header() {
                     </h2>
                     <p className="mt-6 text-lg leading-8 text-gray-600">
                         Generate blog posts using OpenAi API. No more beating
-                        your head against the wall trying to come up with a blog
-                        post idea.
+                        your head against the wall trying to come up with blog
+                        post ideas.
                     </p>
                 </div>
             </div>

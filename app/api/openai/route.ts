@@ -18,13 +18,11 @@ export async function POST(request: Request, response: any) {
                     {
                         role: "user",
                         // content: `Create small blog post with html tags based on this title: ${title}`,
-                        content: `Create 3 line blog post with html tags based on this title: ${title}`,
+                        content: `Create a 5 line blog post based on this title: ${title}. Do not return the title as part of the content.`,
                     },
                     {
                         role: "system",
-                        content: `${
-                            role || "I am a helpful assistant"
-                        }. Write with html tags.`,
+                        content: `${role || "I am a helpful assistant"}`,
                     },
                 ],
             });
